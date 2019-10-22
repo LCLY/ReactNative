@@ -9,42 +9,32 @@ import {
     FlatList,
 } from "react-native";
 import GoalItem from "./components/GoalItem";
+import GoalInput from "./components/GoalInput";
 
 export default function App() {
-    const [enteredGoal, setEnteredGoal] = useState("");
     const [courseGoals, setCourseGoals] = useState([]);
 
-    const goalInputHandler = enteredText => {
-        setEnteredGoal(enteredText);
-    };
-
-    const addGoalHandler = () => {
-        console.log(enteredGoal);
+    const addGoalHandler = goalTitle => {
+        console.log(goalTitle);
         // spread operator which takes existing array
         // and pull out everything out from old array
         // and put into the new array and add new element after coma
         setCourseGoals(courseGoals => [
             ...courseGoals,
-            { id: Math.random().toString(), value: enteredGoal },
+            { id: Math.random().toString(), value: goalTitle },
         ]);
     };
-
     return (
         <View style={styles.screen}>
-            <View style={styles.inputContainer}>
-                <TextInput
-                    placeholder="Course Goal"
-                    style={styles.textInput}
-                    onChangeText={goalInputHandler}
-                    value={enteredGoal}
-                />
-                <Button title="ADD" onPress={addGoalHandler}></Button>
-            </View>
+            <GoalInput onAddGoal={addGoalHandler}></GoalInput>
             <FlatList
                 keyExtractor={(item, index) => item.id}
                 data={courseGoals}
                 renderItem={itemData => (
-                    <GoalItem title={itemData.item.value}></GoalItem>
+                    <GoalItem
+                        title={itemData.item.value}
+                        onDelete={() => console.log("Pressed")}
+                    ></GoalItem>
                 )}
             ></FlatList>
         </View>
@@ -54,16 +44,5 @@ export default function App() {
 const styles = StyleSheet.create({
     screen: {
         padding: 50,
-    },
-    inputContainer: {
-        flexDirection: "row",
-        justifyContent: "space-between",
-        alignContent: "center",
-    },
-    textInput: {
-        borderBottomColor: "black",
-        borderBottomWidth: 1,
-        marginBottom: 5,
-        width: "80%",
     },
 });
