@@ -11,6 +11,10 @@ export default function App() {
 
     const addGoalHandler = () => {
         console.log(enteredGoal);
+        // spread operator which takes existing array
+        // and pull out everything out from old array
+        // and put into the new array and add new element after coma
+        setCourseGoals(courseGoals => [...courseGoals, enteredGoal]);
     };
 
     return (
@@ -24,7 +28,13 @@ export default function App() {
                 />
                 <Button title="ADD" onPress={addGoalHandler}></Button>
             </View>
-            <View></View>
+            <View>
+                {courseGoals.map(goal => (
+                    <Text style={styles.listItem} key={goal}>
+                        {goal}
+                    </Text>
+                ))}
+            </View>
         </View>
     );
 }
@@ -43,5 +53,12 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         marginBottom: 5,
         width: "80%",
+    },
+    listItem: {
+        padding: 10,
+        marginTop: 10,
+        backgroundColor: "#ccc",
+        borderColor: "black",
+        borderWidth: 1,
     },
 });
