@@ -16,6 +16,8 @@ export default function App() {
             ...courseGoals,
             { id: Math.random().toString(), value: goalTitle },
         ]);
+        // here will only render once after changing all the states
+        setIsAddMode(false);
     };
 
     const removeGoalHandler = goalId => {
@@ -24,6 +26,10 @@ export default function App() {
             // basically return a array that the id doesnt match
             return currentGoals.filter(goal => goal.id !== goalId);
         });
+    };
+
+    const cancelGoalAdditionHandler = () => {
+        setIsAddMode(false);
     };
 
     return (
@@ -35,6 +41,7 @@ export default function App() {
             <GoalInput
                 visible={isAddMode}
                 onAddGoal={addGoalHandler}
+                onCancel={cancelGoalAdditionHandler}
             ></GoalInput>
             <FlatList
                 keyExtractor={(item, index) => item.id}
