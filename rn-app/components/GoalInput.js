@@ -34,6 +34,7 @@ const GoalInput = props => {
 
 const styles = StyleSheet.create({
     inputContainer: {
+        flexDirection: "column",
         flex: 1,
         justifyContent: "center",
         alignContent: "center",
@@ -41,7 +42,7 @@ const styles = StyleSheet.create({
     textInput: {
         borderBottomColor: "black",
         borderBottomWidth: 1,
-        marginBottom: 5,
+        marginBottom: 10,
         width: "80%",
         padding: 10,
     },

@@ -42,7 +42,7 @@ export default function App() {
                 visible={isAddMode}
                 onAddGoal={addGoalHandler}
                 onCancel={cancelGoalAdditionHandler}
-            ></GoalInput>
+            />
             <FlatList
                 keyExtractor={(item, index) => item.id}
                 data={courseGoals}
